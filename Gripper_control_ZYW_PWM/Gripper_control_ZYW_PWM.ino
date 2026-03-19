@@ -68,14 +68,14 @@ void setup() {
 
 void loop() {
   // 读取通道PWM值
-  int ch5Value = pulseIn(CH5_PIN, HIGH, 20000);  // 超时20ms:使用较短超时以提高响应速度
-  int ch6Value = pulseIn(CH6_PIN, HIGH, 20000);
-  int ch7Value = pulseIn(CH7_PIN, HIGH, 20000);
+  int ch5Value = pulseIn(CH5_PIN, HIGH, 30000);  // 超时20ms:使用较短超时以提高响应速度
+  int ch6Value = pulseIn(CH6_PIN, HIGH, 30000);
+  int ch7Value = pulseIn(CH7_PIN, HIGH, 30000);
 
   // Ch5：仅当值显著变化时更新，并短暂延迟重新读取以确认
   if (abs(ch5Value - lastCh5Value) > 300) {  // 变化超过300us视为潜在切换
     delay(DEBOUNCE_TIME);  // 短暂等待信号稳定
-    ch5Value = pulseIn(CH5_PIN, HIGH, 20000);  // 重新读取
+    ch5Value = pulseIn(CH5_PIN, HIGH, 30000);  // 重新读取
     lastCh5Value = ch5Value;
     Serial.print("Ch5信号变化检测: "); Serial.println(ch5Value);
   }
@@ -84,7 +84,7 @@ void loop() {
   static int lastCh6Value = 0;
   if (abs(ch6Value - lastCh6Value) > 100) {
     delay(DEBOUNCE_TIME);
-    ch6Value = pulseIn(CH6_PIN, HIGH, 20000);
+    ch6Value = pulseIn(CH6_PIN, HIGH, 30000);
     lastCh6Value = ch6Value;
     Serial.print("Ch6信号变化检测: "); Serial.println(ch6Value);
   }
@@ -93,7 +93,7 @@ void loop() {
   static int lastCh7Value = 0;
   if (abs(ch7Value - lastCh7Value) > 100) {
     delay(DEBOUNCE_TIME);
-    ch7Value = pulseIn(CH7_PIN, HIGH, 20000);
+    ch7Value = pulseIn(CH7_PIN, HIGH, 30000);
     lastCh7Value = ch7Value;
     Serial.print("Ch7信号变化检测: "); Serial.println(ch7Value);
   }
